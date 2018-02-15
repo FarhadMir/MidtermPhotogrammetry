@@ -21,3 +21,12 @@ truecolor = mean value of the subpixels in a superpixel
 The test image uploaded as test3.jpg
 
 Results are uploaded in result dir
+
+
+![md](https://user-images.githubusercontent.com/36164448/36243919-070d67fa-11f2-11e8-8acb-86e65d8fc423.jpg)
+![cd](https://user-images.githubusercontent.com/36164448/36243926-0a480664-11f2-11e8-9fe5-c5fa360150db.jpg)
+![ms](https://user-images.githubusercontent.com/36164448/36243927-0cb17ebc-11f2-11e8-8465-3500b35c1839.jpg)
+![cs](https://user-images.githubusercontent.com/36164448/36243929-0ea79648-11f2-11e8-8f06-16278fffce46.jpg)
+![md cd](https://user-images.githubusercontent.com/36164448/36243932-1057cd32-11f2-11e8-90b5-7818938727ec.jpg)
+![ms cs](https://user-images.githubusercontent.com/36164448/36243933-11da86c2-11f2-11e8-8863-147e9ab249e0.jpg)
+![md cd ms cs](https://user-images.githubusercontent.com/36164448/36243935-13765042-11f2-11e8-9139-17d78ff9b99c.jpg)
