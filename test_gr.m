@@ -1,31 +1,30 @@
 close all; clear all;clc;
 %% Superpixel Segmentation
-A = im2double(imread('test.jpg'));imshow(A);
+A = im2double(imread('test3.jpg'));imshow(A);
 [L,NumLabels] = superpixels(A,100);
 figure;
 BW = boundarymask(L);
 imshow(imoverlay(A,BW,'cyan'))
-outputImage = zeros(size(A),'like',A);
+cd = zeros(size(A),'like',A);
 idx = label2idx(L);
 numRows = size(A,1);
 numCols = size(A,2);
-
+%% Optimization
+% initialization
 for labelVal = 1:NumLabels
     redIdx = idx{labelVal};
     greenIdx = idx{labelVal}+numRows*numCols;
     blueIdx = idx{labelVal}+2*numRows*numCols;
-    outputImage(redIdx) = mean(A(redIdx));
-    outputImage(greenIdx) = mean(A(greenIdx));
-    outputImage(blueIdx) = mean(A(blueIdx));
+    cd(redIdx) = mean(A(redIdx));
+    cd(greenIdx) = mean(A(greenIdx));
+    cd(blueIdx) = mean(A(blueIdx));
     
 end    
-figure
-imshow(outputImage);
-%% Optimization
-% initialization
-cd= im2double(200*ones(size(A),'uint8'));cs= im2double(200*ones(size(A),'uint8'));
+
+cs= im2double(200*ones(size(A),'uint8'));
 md= 0.5*ones(size(A,1),size(A,2));ms= 0.5*ones(size(A,1),size(A,2));
-numiter=1000;alpha= 0.4;
+% 
+numiter=1000;alpha= 0.3;
 cd_k = zeros(size(A),'like',A);
 md_k= zeros(size(md),'like',md);
 ms_k= zeros(size(ms),'like',ms);
@@ -37,9 +36,9 @@ for k=1:numiter
         redIdx = idx{labelVal};
         greenIdx = idx{labelVal}+numRows*numCols;
         blueIdx = idx{labelVal}+2*numRows*numCols;
-        cd_k(redIdx) = mean(cd(redIdx)- alpha*(2*md(redIdx).*(md(redIdx).*cd(redIdx)+ms(redIdx).*cs(redIdx)-A(redIdx))));
-        cd_k(greenIdx) = mean(cd(greenIdx)- alpha*(2*md(redIdx).*(md(redIdx).*cd(greenIdx)+ms(redIdx).*cs(greenIdx)-A(greenIdx))));
-        cd_k(blueIdx) = mean(cd(blueIdx)- alpha*(2*md(redIdx).*(md(redIdx).*cd(blueIdx)+ms(redIdx).*cs(blueIdx)-A(blueIdx))));
+        cd_k(redIdx) = (cd(redIdx)- alpha*2*(md(redIdx).*(md(redIdx).*cd(redIdx)+ms(redIdx).*cs(redIdx)-A(redIdx))));
+        cd_k(greenIdx) = (cd(greenIdx)- alpha*2*(md(redIdx).*(md(redIdx).*cd(greenIdx)+ms(redIdx).*cs(greenIdx)-A(greenIdx))));
+        cd_k(blueIdx) = (cd(blueIdx)- alpha*2*(md(redIdx).*(md(redIdx).*cd(blueIdx)+ms(redIdx).*cs(blueIdx)-A(blueIdx))));
     end
     
     a=0;b=0;
@@ -75,7 +74,7 @@ for k=1:numiter
     s = s(:);
     d= sqrt(sum(s)); 
     
-    if abs(d)<1e-6
+    if abs(d)<1e-3
         break
     end
  % updating cs,ms,cd,md   
@@ -83,12 +82,16 @@ for k=1:numiter
     cs(:,:,1)= mean(mean(cs_k(:,:,1)))*ones(size(cs,1),size(cs,2));
     cs(:,:,2)= mean(mean(cs_k(:,:,2)))*ones(size(cs,1),size(cs,2));
     cs(:,:,3)= mean(mean(cs_k(:,:,3)))*ones(size(cs,1),size(cs,2));
+    %alpha_md= md_k-md
     md= md_k;ms= ms_k;cd= cd_k;
 end
 
 figure;
-imshow(md);figure;
-imshow(cd);figure;
-imshow(ms);figure;
-imshow(cs);
+imshow(md);title('md');figure;
+imshow(cd);title('cd');figure;
+imshow(ms);title('ms');figure;
+imshow(cs);title('cs');figure;
+imshow(md.*cd);title('md*cd');figure;
+imshow(ms.*cs);title('ms*cs');figure;
+imshow(md.*cd+ms.*cs);title('md*cd+ms*cs')
 
