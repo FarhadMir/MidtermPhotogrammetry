@@ -17,3 +17,7 @@ scale_true_color = scale_illumination = 0.5
 illumination = 0.784
 
 truecolor = mean value of the subpixels in a superpixel
+
+The test image uploaded as test3.jpg
+
+Results are uploaded in result dir
