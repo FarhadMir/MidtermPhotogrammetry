@@ -41,7 +41,6 @@ for k=1:numiter
         cd_k(blueIdx) = (cd(blueIdx)- alpha*2*(md(redIdx).*(md(redIdx).*cd(blueIdx)+ms(redIdx).*cs(blueIdx)-A(blueIdx))));
     end
     
-    a=0;b=0;
     for i=1:numRows*numCols
  % m_d       
         md_k(i)=md(i)-alpha*2*(([cd(i),cd(i+numRows*numCols),cd(i+2*numRows*numCols)])*...
