@@ -13,5 +13,7 @@ x_k+1 = x_k - alpha * Gradient_x @ x_k
 and Initialization of:
 
 scale_true_color = scale_illumination = 0.5
+
 illumination = 0.784
+
 truecolor = mean value of the subpixels in a superpixel
