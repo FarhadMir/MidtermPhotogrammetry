@@ -22,7 +22,8 @@ The test image uploaded as test3.jpg
 
 Results are uploaded in result dir
 
-
+![originalimage](https://user-images.githubusercontent.com/36164448/36244087-c7035f88-11f2-11e8-8cf1-0b31454bbc57.jpg)
+![superpixelsegmentation](https://user-images.githubusercontent.com/36164448/36244093-c9f2ebc8-11f2-11e8-9deb-12416e449fa7.jpg)
 ![md](https://user-images.githubusercontent.com/36164448/36243919-070d67fa-11f2-11e8-8acb-86e65d8fc423.jpg)
 ![cd](https://user-images.githubusercontent.com/36164448/36243926-0a480664-11f2-11e8-9fe5-c5fa360150db.jpg)
 ![ms](https://user-images.githubusercontent.com/36164448/36243927-0cb17ebc-11f2-11e8-8465-3500b35c1839.jpg)
